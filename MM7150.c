@@ -1,6 +1,6 @@
 /*
  *  15.07.2016
- *  Author: PN
+ *  Author: PN, MD
  *  FileInfo:
  */
 //******************************************************************************
@@ -10,7 +10,7 @@
 #include "MM7150config.h"
 #include <stdint.h>
 //#include "MM7150user_funcs.h"
-#include "p32mz2048efh064.h"
+#include "p32mz2048efh100.h"
 //******************************************************************************
 //* D E F I N E  S E C T I O N 
 //******************************************************************************
@@ -4891,21 +4891,21 @@ const unsigned int IMUinitVal[3633]=
 //******************************************************************************
 //* F U N C T I O N S
 //******************************************************************************
-static inline void ConfigI2C4(void)
+static inline void ConfigI2C5(void)
 {
-    I2C4CON= 0x00;
-    I2C4STAT= 0x00;
-    I2C4TRN= 0x00;
-    I2C4RCV= 0x00;
-    I2C4BRG= 0;
-    I2C4BRG= 0x10; //400kHz przy 16 MHz cz. taktowania, wg wzoru z dokument.
-    //I2C4CONbits.DISSLW = 1; //slew  rate control disabled for standard speed (100 kHz) mode
-    //I2C4CONbits.RCEN = 1;
+    I2C5CON= 0x00;
+    I2C5STAT= 0x00;
+    I2C5TRN= 0x00;
+    I2C5RCV= 0x00;
+    I2C5BRG= 0;
+    I2C5BRG= 0x10; //400kHz przy 16 MHz cz. taktowania, wg wzoru z dokument.
+    //I2C5CONbits.DISSLW = 1; //slew  rate control disabled for standard speed (100 kHz) mode
+    //I2C5CONbits.RCEN = 1;
 }
 
-static inline void OnI2C4(void)
+static inline void OnI2C5(void)
 {
-    I2C4CONbits.ON= 1;
+    I2C5CONbits.ON= 1;
 }
  
 void MM7150attendance(void) 
@@ -4913,8 +4913,8 @@ void MM7150attendance(void)
     switch(IMUstate)
     {
         case I2Cunconfigured:
-            ConfigI2C4();
-            OnI2C4();
+            ConfigI2C5();
+            OnI2C5();
             IMUstate= ResetMM7150;
             IMUConfigSequence= ConfigIdle;
             IMUReadSequence= IdleRead;

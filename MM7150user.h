@@ -1,6 +1,6 @@
 /*
  *  15.07.2016
- *  Author: PN
+ *  Author: PN, MD
  *  FileInfo: 
  */
 #ifndef _MM7150USER_H    /* Guard against multiple inclusion */

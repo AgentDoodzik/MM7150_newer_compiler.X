@@ -1,17 +1,18 @@
 /* 
  * File:   main.c
- * Author: PN
+ * Author: PN, MD
  *
  * Created on 29 grudzien 2015, 8:23
  */
 //******************************************************************************
 //* I N C L U D E  S E C T I O N
 //******************************************************************************
-#include "p32mz2048efh064.h"
+#include "p32mz2048efh100.h"
 #include "MM7150globalvars.h"
 #include "InitPIC.h"
 #include "UART_user.h"
 #include "MM7150config.h"
+#include "Prandtl.h"
 #include <stdio.h>
 //******************************************************************************
 //* C O N F I G  C L O C K  S E C T I O N
@@ -71,7 +72,9 @@ unsigned int main(void)
     ConfigTimer();
     AllPortsDigital();
     ODCBbits.ODCB3= 1;
-//    CNPUBbits.CNPUB3= 1;
+    ADC_General_Config();
+    config_Prandtl_1();
+    config_Prandtl_2();
     ConfigINT();
     OnINT();
     GlobalINTon();
@@ -80,9 +83,11 @@ unsigned int main(void)
     OnOC();
     ConfigIO();
     Wake_Config_Enable();
+    ADC_Enable_Disable(1);
     OnTimer2();
     OnTimer3();
-   UART();
+    UART();
+   
     
     while(1)
     {

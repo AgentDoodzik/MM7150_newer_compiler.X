@@ -1,5 +1,5 @@
 
-#include "p32mz2048efh064.h"
+#include "p32mz2048efh100.h"
 
 void ConfigTimer(void)
 {    
@@ -81,7 +81,7 @@ void ConfigIO(void)
 
 void Wake_Config_Enable()
 {
-    TRISBbits.TRISB5 = 0;
-    LATBbits.LATB5 = 1;
+    TRISDbits.TRISD11 = 0;
+    LATDbits.LATD11 = 1;
     //INT4Rbits.INT4R = 0b1000;
 }
