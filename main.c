@@ -108,11 +108,10 @@ unsigned int main(void)
     UART_send_string("\n *** UART Succesfully enabled ***\n\0");
     Wake_Config_Enable();
     ADC_Enable_Disable(1);
-    //sprintf(tx_buff1, "DMA trn. start\0");
-    DMA_enable();
+    //DMA_enable(); //DMA is disabled for now
     OnTimer2();
     OnTimer3();
-    OnTimer4();
+    //OnTimer4();
     
    
     while(1)

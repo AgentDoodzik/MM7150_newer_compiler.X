@@ -1376,6 +1376,10 @@
                   value=""/>
         <property key="warningmessagebreakoptions.warningmessages" value="holdstate"/>
       </Tool>
+      <item path="controllers.c" ex="true" overriding="false">
+      </item>
+      <item path="mikser.c" ex="true" overriding="false">
+      </item>
     </conf>
   </confs>
 </configurationDescriptor>

@@ -25,6 +25,7 @@ extern unsigned short Compass; // COMPASS 0-360 DEGREES
 //alt compass type
 //extern int16_t Compass; 
 extern char tx_buff1[20]; //buffer for UART
+extern char tx_buff2[20]; //second buffer for UART
 
 
 #ifdef	__cplusplus
