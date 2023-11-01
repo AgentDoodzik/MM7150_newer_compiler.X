@@ -13,7 +13,8 @@
 
 
 void UART();
-int UART_send(char* txt_to_send);
+void UART_send_string(char* txt_to_send);
+
 
 
 #ifdef	__cplusplus

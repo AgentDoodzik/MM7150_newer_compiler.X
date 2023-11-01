@@ -15,6 +15,7 @@
       <itemPath>mikser.h</itemPath>
       <itemPath>servo.h</itemPath>
       <itemPath>Prandtl.h</itemPath>
+      <itemPath>DMA.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -34,6 +35,7 @@
       <itemPath>mikser.c</itemPath>
       <itemPath>servo.c</itemPath>
       <itemPath>Prandtl.c</itemPath>
+      <itemPath>DMA.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -53,7 +55,7 @@
         <targetDevice>PIC32MZ2048EFH100</targetDevice>
         <targetHeader></targetHeader>
         <targetPluginBoard></targetPluginBoard>
-        <platformTool>noID</platformTool>
+        <platformTool>PICkit3PlatformTool</platformTool>
         <languageToolchain>XC32</languageToolchain>
         <languageToolchainVersion>4.10</languageToolchainVersion>
         <platform>3</platform>
@@ -294,6 +296,7 @@
         <property key="debugoptions.debug-startup" value="Use system settings"/>
         <property key="debugoptions.reset-behaviour" value="Use system settings"/>
         <property key="debugoptions.useswbreakpoints" value="false"/>
+        <property key="firmware.download.all" value="false"/>
         <property key="hwtoolclock.frcindebug" value="false"/>
         <property key="memories.aux" value="false"/>
         <property key="memories.bootflash" value="true"/>

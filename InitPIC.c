@@ -2,14 +2,16 @@
 #include "p32mz2048efh100.h"
 
 void ConfigTimer(void)
-{    
+{
+    T2CON = 0x0;
     T2CONbits.TCKPS= 0b001;
     PR2= 399; //40 kHz
     TMR2= 0;
     
-//    T3CONbits.TCKPS= 0b110;
-//    PR3= 4999; //50Hz
-//    TMR3= 0;
+    T3CON = 0x0;
+    T3CONbits.TCKPS= 0b110;
+    PR3= 4999; //50Hz
+    TMR3= 0;
 }
  void AllPortsDigital(void)
 {
@@ -58,20 +60,20 @@ void GlobalINTon(void)
 }
 void ConfigPPS(void)
 {
-//    RPB14Rbits.RPB14R= 0b1100; //OC1
-//    TRISBbits.TRISB8 = 0;
-//    PORTBbits.RB8 = 0;
+    RPB14Rbits.RPB14R= 0b1100; //OC1
+    TRISBbits.TRISB8 = 0;
+    PORTBbits.RB8 = 0;
     
 }
 void ConfigOC(void)
 {
-//    OC1CONbits.OCM= 6;//tryb PWM
-//    OC1CONbits.OCTSEL= 1;// timer3
-    //OC1RS= 2500;
+    OC1CONbits.OCM= 6;//tryb PWM
+    OC1CONbits.OCTSEL= 1;// timer3
+    OC1RS= 2500;
 }
 void OnOC(void)
 {
-//    OC1CONbits.ON= 1;
+    OC1CONbits.ON= 1;
 }
 void ConfigIO(void)
 {
@@ -84,4 +86,29 @@ void Wake_Config_Enable()
     TRISDbits.TRISD11 = 0;
     LATDbits.LATD11 = 1;
     //INT4Rbits.INT4R = 0b1000;
+}
+
+void Timer4_Config(void)
+{
+    /* 
+     * This timer is going to trigger DMA transfer to UART 5 TX register
+     * The transferred data will be the information from IMU1 and ADCs reading
+     * inputs from Prandtl pipes 
+     */
+    T4CON = 0x0;
+    T4CONbits.TCKPS= 0b111; //1:256 prescaler
+    PR4= 31249; //2 Hz
+    TMR4= 0;
+    
+    IEC0bits.T5IE = 0; // disable the interrupt for config
+    IFS0bits.IC5IF = 0; //clear the flag
+    IPC4bits.T4IP = 4; //priority 3
+    IPC4bits.T4IS = 2;// subpriority 2
+}
+
+void OnTimer4(void)
+{
+    IEC0bits.T5IE = 1;  //enable the interrupt;
+    T4CONbits.ON = 1;
+    
 }

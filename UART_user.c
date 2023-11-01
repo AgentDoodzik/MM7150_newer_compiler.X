@@ -1,51 +1,47 @@
 #include "UART_user.h"
-#include "p32mz2048efh064.h"
+//#include "p32mz2048efh064.h"
+#include "p32mz2048efh100.h"
 #include <string.h>
 void UART() //konfiguracja
 {
-    U2MODE=0;
-    U2STA = 0;
-    U2BRG = 0;
+    U5MODE= 0;
+    U5STA = 0;
+    U5BRG = 0;
     
     /// Configuration of Tx and Rx I/O
-    TRISBbits.TRISB14 = 0; //output - TX
-    TRISBbits.TRISB15 = 1;
-    RPB14Rbits.RPB14R = 0b0010; //U2TX
-    U2RXRbits.U2RXR = 0b0011; //RPB15 - U2RX
+    ANSELEbits.ANSE5 = 0; //digital
+    ANSELBbits.ANSB5 = 0; //digital
+    TRISEbits.TRISE5 = 0; //output - TX
+    TRISBbits.TRISB5 = 1; //input - RX
+    RPE5Rbits.RPE5R = 0b0011; //U5TX - CPU1
+    U5RXRbits.U5RXR = 0b1000; //RPB5 - U5RX - CPU1
     
     //UxBRG == ((PBCLK/(16 * BAUDRATE ) -1 ), when BRGH = 0
     
     //PBCLK2 = 16 MHz
     
-    U2MODEbits.BRGH = 0;
-    U2BRG= (((16000000)/(16*9600))-1);
-    U2STAbits.UTXEN=1;
-    U2STAbits.URXEN=1;
-    U2MODEbits.PDSEL=0;
-    U2MODEbits.STSEL=0;
-    //U2MODEbits.UEN = 0b11;
-    U2MODEbits.ON=1;
-}
-int UART_send(char* txt_to_send)
-{
-    static int i =0;
-    //&& (U2STAbits.UTXBF == 0))
-    if(i<=strlen(txt_to_send))
-    {
-         //while(U2STAbits.UTXBF !=0) {}; //czekamy, az bufor sie wyczysci
-         if(U2STAbits.UTXBF == 0)
-         {
-         
-             U2TXREG = txt_to_send[i++];//txt_to_send[i++];
-         }
-         return 0;
-
-    }
-    else
-    {i= 0;
-    return 1;
-    }
+    U5MODEbits.BRGH = 0;
+    U5BRG= (((16000000)/(16*9600))-1);
+    U5MODEbits.PDSEL=1;
+    U5MODEbits.STSEL=1;
     
+    U5STAbits.UTXEN=1;
+    U5STAbits.URXEN=0;
+    U5MODEbits.UEN = 0b00;
+    U5MODEbits.ON=1;
+}
+void UART_send_string(char* txt_to_send)
+{
+    int i =0;
+    for(;txt_to_send[i]!='\0';)
+    {
+         if(!U5STAbits.UTXBF)
+         {
+             U5TXREG = (uint32_t)txt_to_send[i];
+             i++;
+         }
+    }
+   
 }       
   
     

@@ -1,5 +1,6 @@
 #include "p32mz2048efh100.h"
 #include "xc.h"
+//#include "p32mz2048efh064.h"
 
 void ADC_Enable_Disable(char set_adc)
 {
@@ -49,21 +50,21 @@ void config_Prandtl_1(void)
     
 }
 
-void config_Prandtl_2(void)
-{
-    ANSELAbits.ANSA1 = 1; //AN1 as analog - required for ADC
-    TRISAbits.TRISA1 = 1; //AN1 as data input
-    ADC1CFG = DEVADC1; //calibration value
-    ADCTRGMODEbits.SH1ALT = 0b00; // AN0 as analog input
-    ADCTRG1bits.TRGSRC1 = 0b01000; //OC1 is the trigger for ADC conversion for AN0 (?)
-    //sampling time settings
-    ADC1TIMEbits.ADCDIV = 1; // ADC0 clock frequency is half of control clock = TAD0
-    ADC1TIMEbits.SAMC = 5; // ADC0 sampling time = 5 * TAD0
-    ADC1TIMEbits.SELRES = 3; // ADC0 resolution is 12 bits
-    
-    //this analog input will be scanned
-    //ADCCSS1bits.CSS1 = 1;
-}
+//void config_Prandtl_2(void)
+//{
+//    ANSELAbits.ANSA1 = 1; //AN1 as analog - required for ADC
+//    TRISAbits.TRISA1 = 1; //AN1 as data input
+//    ADC1CFG = DEVADC1; //calibration value
+//    ADCTRGMODEbits.SH1ALT = 0b00; // AN0 as analog input
+//    ADCTRG1bits.TRGSRC1 = 0b01000; //OC1 is the trigger for ADC conversion for AN0 (?)
+//    //sampling time settings
+//    ADC1TIMEbits.ADCDIV = 1; // ADC0 clock frequency is half of control clock = TAD0
+//    ADC1TIMEbits.SAMC = 5; // ADC0 sampling time = 5 * TAD0
+//    ADC1TIMEbits.SELRES = 3; // ADC0 resolution is 12 bits
+//    
+//    //this analog input will be scanned
+//    //ADCCSS1bits.CSS1 = 1;
+//}
 
 //void config_Prandtl_3(void)
 //{
@@ -86,7 +87,7 @@ void config_Prandtl_2(void)
 //void config_Prandtl_5(void)
 //{
 //    //ANSELAbits.ANSA4 = 1; //AN4 as analog - required for ADC
-//    TRISAbits.TRISA4 = 1; //AN0 as data input
+//    TRISBbits.TRISB4 = 1; //RPB4 as data input
 //    ADC4CFG = DEVADC4; //calibration value
 //    ADCTRGMODEbits.SH4ALT = 0b00; // AN4 as analog input
 //    ADCTRG2bits.TRGSRC4 = 0b01000; //OC1 is the trigger for ADC conversion for AN4 (?)

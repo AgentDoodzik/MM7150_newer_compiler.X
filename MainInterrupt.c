@@ -20,7 +20,7 @@
 #include "UART_user.h"
 #include "MM7150user.h"
 #include "MM7150globalvars.h"
-
+#include <string.h>
 
 //******************************************************************************
 //* M A I N  I N T E R R U P T  H A N D L E R                                 
@@ -28,8 +28,8 @@
 int spf_sucess = 0;
 int tx1_end = 0;
 int tx2_end = 0;
+//char tx_buff1[20];
 
-char tx_buff1[100], tx_buff2[100];
 void __ISR(_TIMER_2_VECTOR, IPL7SRS) Timer2Handler(void)
 {
     IFS0bits.T2IF= 0;
@@ -38,8 +38,11 @@ void __ISR(_TIMER_2_VECTOR, IPL7SRS) Timer2Handler(void)
     if(PeriodGlobal>0)
     {   
         //odczytaj wynik
-        sprintf(tx_buff1,"0x3IX%d\\Y%d\\Z%d", InclinometerX, InclinometerY, InclinometerZ);
-        sprintf(tx_buff2,"0x3P%d",(ADCDATA0 + ADCDATA1)/2);
+        sprintf(tx_buff1,"X%d\\Y%d\\Z%d\0", InclinometerX, InclinometerY, InclinometerZ);
+  
+        //sprintf(tx_buff2,"0x3P%d\0",ADCDATA0
+        
+        //UART_send_string("Test message\0");
         PeriodGlobal= 0;       
     }
 }
