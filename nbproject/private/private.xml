@@ -6,7 +6,9 @@
             <file>file:/C:/Users/macie/MPLABXProjects/MM7150_newer_compiler.X/UART_user.c</file>
             <file>file:/C:/Users/macie/MPLABXProjects/MM7150_newer_compiler.X/main.c</file>
             <file>file:/C:/Users/macie/MPLABXProjects/MM7150_newer_compiler.X/servo.c</file>
-            <file>file:/C:/Users/macie/MPLABXProjects/MM7150_newer_compiler.X/MM7150globalvars.h</file>
+            <file>file:/C:/Users/macie/MPLABXProjects/MM7150_newer_compiler.X/controllers.h</file>
+            <file>file:/C:/Users/macie/MPLABXProjects/MM7150_newer_compiler.X/InitPIC.h</file>
+            <file>file:/C:/Users/macie/MPLABXProjects/MM7150_newer_compiler.X/InitPIC.c</file>
             <file>file:/C:/Users/macie/MPLABXProjects/MM7150_newer_compiler.X/MainInterrupt.c</file>
             <file>file:/C:/Users/macie/MPLABXProjects/MM7150_newer_compiler.X/MM7150config.h</file>
         </group>
