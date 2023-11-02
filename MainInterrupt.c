@@ -20,6 +20,7 @@
 #include "UART_user.h"
 #include "MM7150user.h"
 #include "MM7150globalvars.h"
+#include "p32mz2048efh064.h"
 #include <string.h>
 
 //******************************************************************************
@@ -38,9 +39,9 @@ void __ISR(_TIMER_2_VECTOR, IPL7SRS) Timer2Handler(void)
     if(PeriodGlobal>0)
     {   
         //odczytaj wynik
-        sprintf(tx_buff1,"X%d\\Y%d\\Z%d\0", InclinometerX, InclinometerY, InclinometerZ);
+        sprintf(tx_buff1,"X%d\\Y%d\\Z%d\n\rAvg prandtl reading: %d\n\r\004", InclinometerX, InclinometerY, InclinometerZ, (ADCDATA0 + ADCDATA1/2));
   
-        //sprintf(tx_buff2,"0x3P%d\0",ADCDATA0
+        //sprintf(tx_buff2,"0x3P%d\0",ADCDATA0)
         
         //UART_send_string("Test message\0");
         PeriodGlobal= 0;       

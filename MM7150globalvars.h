@@ -24,7 +24,7 @@ extern signed short InclinometerZ; // INCLINOMETER Z AXIS
 extern unsigned short Compass; // COMPASS 0-360 DEGREES
 //alt compass type
 //extern int16_t Compass; 
-extern char tx_buff1[20]; //buffer for UART
+extern char tx_buff1[36]; //buffer for UART
 
 
 #ifdef	__cplusplus

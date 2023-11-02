@@ -23,14 +23,15 @@ void config_DMA(void)
     
     // channel off, priority 3, no chaining
     DCH0CONbits.CHPRI = 0b11; //highest priority 
-    DCH0ECONbits.CHSIRQ = 19; //timer 4 interrupt starts the transfer
+    DCH0ECONbits.CHSIRQ = 181; //UART5 TX transfer done interrupt starts the transfer
     DCH0ECONbits.SIRQEN = 1; //start the transfer when the interrupt above occurs
+    DCH0DAT = '\004'; //termination mark - carriage return
     
     DCH0SSA= KVA_TO_PA(source_address_kseg1); // transfer source physical address
     DCH0DSA= KVA_TO_PA(dest_address_kseg1);// transfer destination physical address
     
-    DCH0SSIZ= 20; // source size 200 bytes
-    DCH0DSIZ= 1; // destination size 200 bytes
+    DCH0SSIZ= 20; // source size 20 bytes
+    DCH0DSIZ= 1; // destination size 1 bytes
     DCH0CSIZ= 1;
     DCH0CONbits.CHAEN = 1; //autoenable
     

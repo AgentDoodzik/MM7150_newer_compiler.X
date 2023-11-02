@@ -85,14 +85,14 @@
 //******************************************************************************
 //* M A I N  F U N C T I O N 
 //******************************************************************************
-char tx_buff1[20];
+char tx_buff1[36];
 unsigned int main(void)
 {   
     AllPortsDigital();
     ConfigPerformance();
     IMUReadReqest= 0xF; //set 0xf to read
     ConfigTimer();
-    Timer4_Config();
+    //Timer4_Config();
     ADC_General_Config();
     config_Prandtl_1();
     ConfigINT();
@@ -112,7 +112,7 @@ unsigned int main(void)
     DMA_enable();
     OnTimer2();
     OnTimer3();
-    OnTimer4();
+    //OnTimer4();
     
    
     while(1)

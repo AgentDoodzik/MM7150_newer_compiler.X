@@ -1,5 +1,6 @@
 #include "p32mz2048efh100.h"
 #include "xc.h"
+#include "p32mz2048efh064.h"
 //#include "p32mz2048efh064.h"
 
 void ADC_Enable_Disable(char set_adc)
@@ -19,6 +20,9 @@ void ADC_General_Config(void)
     
     ADCCON1bits.FRACT = 0;
     ADCIMCON1bits.SIGN0 = 1;
+    ADCIMCON1bits.DIFF0 = 1; //differential ("two-sided") mode
+    ADCIMCON1bits.SIGN4 = 1;
+    ADCIMCON1bits.DIFF4 = 1;
      //set the voltage reference 
     ADCCON3bits.VREFSEL = 0b000; //AVDD for VREFH, AVSS for VREFL
     
@@ -30,6 +34,9 @@ void ADC_General_Config(void)
     ADCGIRQEN1 = 0;
     ADCGIRQEN2 = 0;
     
+    ADCCSS1bits.CSS0 = 1; //class 1 set for scan
+    ADCCSS1bits.CSS8 = 1; //class 2 set for scan
+    
 
 }
 
@@ -38,6 +45,7 @@ void config_Prandtl_1(void)
     ANSELAbits.ANSA0 = 1; //AN0 as analog - required for ADC
     TRISAbits.TRISA0 = 1; //AN0 as data input
     ADC0CFG = DEVADC0; //calibration value
+    
     ADCTRGMODEbits.SH0ALT = 0b00; // AN0 as analog input
     ADCTRG1bits.TRGSRC0 = 0b01000; //OC1 is the trigger for ADC conversion for AN0 (?)
     
@@ -84,22 +92,22 @@ void config_Prandtl_1(void)
 //    ADCTRG1bits.TRGSRC3 = 0b01000; //OC1 is the trigger for ADC conversion for AN0 (?)
 //}
 
-//void config_Prandtl_5(void)
-//{
-//    //ANSELAbits.ANSA4 = 1; //AN4 as analog - required for ADC
-//    TRISBbits.TRISB4 = 1; //RPB4 as data input
-//    ADC4CFG = DEVADC4; //calibration value
-//    ADCTRGMODEbits.SH4ALT = 0b00; // AN4 as analog input
-//    ADCTRG2bits.TRGSRC4 = 0b01000; //OC1 is the trigger for ADC conversion for AN4 (?)
-//}
+void config_Prandtl_5(void)
+{
+    ANSELBbits.ANSB4 = 1; //AN4 as analog - required for ADC
+    TRISBbits.TRISB4 = 1; //RPB4 as data input
+    ADC4CFG = DEVADC4; //calibration value
+    ADCTRGMODEbits.SH4ALT = 0b00; // AN4 as analog input
+    ADCTRG2bits.TRGSRC4 = 0b01000; //OC1 is the trigger for ADC conversion for AN4 (?)
+    
+    //sampling time settings
+    ADC4TIMEbits.ADCDIV = 1; // ADC4 clock frequency is half of control clock = TAD0
+    ADC4TIMEbits.SAMC = 5; // ADC4 sampling time = 5 * TAD0
+    ADC4TIMEbits.SELRES = 3; // ADC4 resolution is 12 bits
+}
 
-//void config_Prandtl_6(void)
-//{
-//    
-//    ANSELAbits.ANSA5 = 1; //AN0 as analog - required for ADC
-//    TRISAbits.TRISA5 = 1; //AN0 as data input
-//    ADC5CFG = DEVADC5; //calibration value
-//    ADCTRGMODEbits.SH = 0b00; // AN0 as analog input
-//    ADCTRG1bits.TRGSRC0 = 0b01000; //OC1 is the trigger for ADC conversion for AN0 (?)
-//}
+void config_Prandtl_6(void)
+{
+    
+}
  
