@@ -44,7 +44,7 @@
     <conf name="default" type="2">
       <toolsSet>
         <developmentServer>localhost</developmentServer>
-        <targetDevice>PIC32MZ2048EFH100</targetDevice>
+        <targetDevice>PIC32MZ2048EFH064</targetDevice>
         <targetHeader></targetHeader>
         <targetPluginBoard></targetPluginBoard>
         <platformTool>PICkit3PlatformTool</platformTool>
@@ -53,7 +53,7 @@
         <platform>3</platform>
       </toolsSet>
       <packs>
-        <pack name="PIC32MZ-EF_DFP" vendor="Microchip" version="1.3.58"/>
+        <pack name="PIC32MZ-EF_DFP" vendor="Microchip" version="1.2.51"/>
       </packs>
       <ScriptingSettings>
       </ScriptingSettings>
@@ -218,12 +218,6 @@
         <property key="stack-smashing" value=""/>
         <property key="wpo-lto" value="false"/>
       </C32Global>
-      <PICkit3PlatformTool>
-        <property key="firmware.download.all" value="false"/>
-      </PICkit3PlatformTool>
-      <Tool>
-        <property key="firmware.download.all" value="false"/>
-      </Tool>
       <item path="servo.c" ex="false" overriding="false">
         <C32>
         </C32>
