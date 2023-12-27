@@ -57,17 +57,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=MM7150.c InitPIC.c main.c MainInterrupt.c UART_user.c controllers.c mikser.c servo.c
+SOURCEFILES_QUOTED_IF_SPACED=MM7150.c InitPIC.c main.c MainInterrupt.c UART_user.c servo.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/MM7150.o ${OBJECTDIR}/InitPIC.o ${OBJECTDIR}/main.o ${OBJECTDIR}/MainInterrupt.o ${OBJECTDIR}/UART_user.o ${OBJECTDIR}/controllers.o ${OBJECTDIR}/mikser.o ${OBJECTDIR}/servo.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/MM7150.o.d ${OBJECTDIR}/InitPIC.o.d ${OBJECTDIR}/main.o.d ${OBJECTDIR}/MainInterrupt.o.d ${OBJECTDIR}/UART_user.o.d ${OBJECTDIR}/controllers.o.d ${OBJECTDIR}/mikser.o.d ${OBJECTDIR}/servo.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/MM7150.o ${OBJECTDIR}/InitPIC.o ${OBJECTDIR}/main.o ${OBJECTDIR}/MainInterrupt.o ${OBJECTDIR}/UART_user.o ${OBJECTDIR}/servo.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/MM7150.o.d ${OBJECTDIR}/InitPIC.o.d ${OBJECTDIR}/main.o.d ${OBJECTDIR}/MainInterrupt.o.d ${OBJECTDIR}/UART_user.o.d ${OBJECTDIR}/servo.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/MM7150.o ${OBJECTDIR}/InitPIC.o ${OBJECTDIR}/main.o ${OBJECTDIR}/MainInterrupt.o ${OBJECTDIR}/UART_user.o ${OBJECTDIR}/controllers.o ${OBJECTDIR}/mikser.o ${OBJECTDIR}/servo.o
+OBJECTFILES=${OBJECTDIR}/MM7150.o ${OBJECTDIR}/InitPIC.o ${OBJECTDIR}/main.o ${OBJECTDIR}/MainInterrupt.o ${OBJECTDIR}/UART_user.o ${OBJECTDIR}/servo.o
 
 # Source Files
-SOURCEFILES=MM7150.c InitPIC.c main.c MainInterrupt.c UART_user.c controllers.c mikser.c servo.c
+SOURCEFILES=MM7150.c InitPIC.c main.c MainInterrupt.c UART_user.c servo.c
 
 
 
@@ -90,7 +90,7 @@ ifneq ($(INFORMATION_MESSAGE), )
 endif
 	${MAKE}  -f nbproject/Makefile-default.mk ${DISTDIR}/MM7150_newer_compiler.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX}
 
-MP_PROCESSOR_OPTION=32MZ2048EFH064
+MP_PROCESSOR_OPTION=32MZ2048EFH100
 MP_LINKER_FILE_OPTION=
 # ------------------------------------------------------------------------------------
 # Rules for buildStep: assemble
@@ -137,18 +137,6 @@ ${OBJECTDIR}/UART_user.o: UART_user.c  .generated_files/flags/default/b466ff6ccf
 	@${RM} ${OBJECTDIR}/UART_user.o 
 	${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -fno-common -MP -MMD -MF "${OBJECTDIR}/UART_user.o.d" -o ${OBJECTDIR}/UART_user.o UART_user.c    -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
 	
-${OBJECTDIR}/controllers.o: controllers.c  .generated_files/flags/default/ed7b4fec00642c3de04f1426753df31893e8dbe9 .generated_files/flags/default/c24b72d7bee263215258d3ef55fcfe58c1441450
-	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/controllers.o.d 
-	@${RM} ${OBJECTDIR}/controllers.o 
-	${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -fno-common -MP -MMD -MF "${OBJECTDIR}/controllers.o.d" -o ${OBJECTDIR}/controllers.o controllers.c    -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
-	
-${OBJECTDIR}/mikser.o: mikser.c  .generated_files/flags/default/4ee310798e8fb703016e295e8aac9ae635ed1114 .generated_files/flags/default/c24b72d7bee263215258d3ef55fcfe58c1441450
-	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/mikser.o.d 
-	@${RM} ${OBJECTDIR}/mikser.o 
-	${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -fno-common -MP -MMD -MF "${OBJECTDIR}/mikser.o.d" -o ${OBJECTDIR}/mikser.o mikser.c    -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
-	
 ${OBJECTDIR}/servo.o: servo.c  .generated_files/flags/default/afa9a739b2ea8e94e127e656c9b172d48d8c782 .generated_files/flags/default/c24b72d7bee263215258d3ef55fcfe58c1441450
 	@${MKDIR} "${OBJECTDIR}" 
 	@${RM} ${OBJECTDIR}/servo.o.d 
@@ -185,18 +173,6 @@ ${OBJECTDIR}/UART_user.o: UART_user.c  .generated_files/flags/default/a8b66d1bfd
 	@${RM} ${OBJECTDIR}/UART_user.o.d 
 	@${RM} ${OBJECTDIR}/UART_user.o 
 	${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -fno-common -MP -MMD -MF "${OBJECTDIR}/UART_user.o.d" -o ${OBJECTDIR}/UART_user.o UART_user.c    -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
-	
-${OBJECTDIR}/controllers.o: controllers.c  .generated_files/flags/default/7cbc34b261fb6969707823221420f9f28ed464aa .generated_files/flags/default/c24b72d7bee263215258d3ef55fcfe58c1441450
-	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/controllers.o.d 
-	@${RM} ${OBJECTDIR}/controllers.o 
-	${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -fno-common -MP -MMD -MF "${OBJECTDIR}/controllers.o.d" -o ${OBJECTDIR}/controllers.o controllers.c    -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
-	
-${OBJECTDIR}/mikser.o: mikser.c  .generated_files/flags/default/51d7c98b2a8a9c804d444ae63b671db7e80c8956 .generated_files/flags/default/c24b72d7bee263215258d3ef55fcfe58c1441450
-	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/mikser.o.d 
-	@${RM} ${OBJECTDIR}/mikser.o 
-	${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -fno-common -MP -MMD -MF "${OBJECTDIR}/mikser.o.d" -o ${OBJECTDIR}/mikser.o mikser.c    -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
 	
 ${OBJECTDIR}/servo.o: servo.c  .generated_files/flags/default/81e05a6c833dbcdaa9d844f04e2aea25d1a05586 .generated_files/flags/default/c24b72d7bee263215258d3ef55fcfe58c1441450
 	@${MKDIR} "${OBJECTDIR}" 

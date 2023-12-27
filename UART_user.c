@@ -18,7 +18,7 @@ void UART() //konfiguracja
     //PBCLK2 = 16 MHz
     
     U2MODEbits.BRGH = 0;
-    U2BRG= (((16000000)/(16*9600))-1);
+    U2BRG= (((16000000)/(16*38400))-1);
     U2STAbits.UTXEN=1;
     U2STAbits.URXEN=1;
     U2MODEbits.PDSEL=0;
@@ -26,26 +26,17 @@ void UART() //konfiguracja
     //U2MODEbits.UEN = 0b11;
     U2MODEbits.ON=1;
 }
-int UART_send(char* txt_to_send)
+void UART_send(char* txt_to_send)
 {
-    static int i =0;
-    //&& (U2STAbits.UTXBF == 0))
-    if(i<=strlen(txt_to_send))
+   
+    for(int i = 0;i<=strlen(txt_to_send);)
     {
-         //while(U2STAbits.UTXBF !=0) {}; //czekamy, az bufor sie wyczysci
-         if(U2STAbits.UTXBF == 0)
+         if(U2STAbits.UTXBF == 0)//oczekiwanie na wyczyszczenie bufora
          {
-         
-             U2TXREG = txt_to_send[i++];//txt_to_send[i++];
+         U2TXREG = txt_to_send[i++];//txt_to_send[i++];
          }
-         return 0;
-
     }
-    else
-    {i= 0;
-    return 1;
-    }
-    
+  
 }       
   
     

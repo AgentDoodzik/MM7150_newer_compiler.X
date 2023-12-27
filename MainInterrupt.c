@@ -29,27 +29,25 @@ int spf_sucess = 0;
 int tx1_end = 0;
 int tx2_end = 0;
 
-char tx_buff[100];
+
 void __ISR(_TIMER_2_VECTOR, IPL7SRS) Timer2Handler(void)
 {
-    
-    IFS0bits.T2IF= 0;
-    
-   
+    IFS0bits.T2IF= 0;   
+    int_cnt++;
    // IMUReadReqest= 0xF;
     MM7150attendance();  
     
     if(PeriodGlobal>0)
     {   
         //odczytaj wynik
-          spf_sucess = sprintf(tx_buff,"\n\rInclinometer = X%hi Y%hi Z%hi\n\rCompass: %hi\n\rAccel: X%hi Y%hi Z%hi", InclinometerX, InclinometerY, InclinometerZ, Compass, AccelerometerX, AccelerometerY, AccelerometerZ);//,InclinometerZ);//\e[1;1H\e[2J - kasowanie tekstu
-        if(spf_sucess <0)
-            UART_send("Sprintf error!\n\r");
-        else
-            UART_send(tx_buff);
-        PeriodGlobal= 0;
-        
-//       
-}
+        sprintf(tx_buff,"Inclinometer Y: %hi\n\r\0", InclinometerY);
+        PeriodGlobal= 0;     
+    }
+    
+    if(int_cnt == 40)
+    {
+        UART_send(tx_buff);
+    }
+    
     
 }

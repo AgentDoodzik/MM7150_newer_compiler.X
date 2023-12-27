@@ -25,6 +25,8 @@ extern unsigned short Compass; // COMPASS 0-360 DEGREES
 //alt compass type
 //extern int16_t Compass; 
 
+extern uint8_t int_cnt; //uart 1kHz counter variable
+extern char tx_buff[100]; //uart buffer
 
 #ifdef	__cplusplus
 extern "C" {
