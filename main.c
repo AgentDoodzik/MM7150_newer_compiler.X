@@ -78,14 +78,18 @@
 // Use project enums instead of #define for ON and OFF.
 
 #include <xc.h>
-//******************************************************************************
-//* M A I N  F U N C T I O N 
-//******************************************************************************
+
+/* ###### PRIVATE VARIABLES #######  */
 //Czestotliwosc zegara sysclk - 32 MHz
 //PBCLK2 i PBCLK3 - 16 MHz (SYSCLK/2)
+/*  ############ */
 char tx_buff[100];
 uint16_t int_cnt = 0;
 unsigned int main(void)
+//******************************************************************************
+//* M A I N  F U N C T I O N 
+//******************************************************************************
+
 {       
     ConfigPerformance();
     IMUReadReqest= 0xF; //set 0xf to read
