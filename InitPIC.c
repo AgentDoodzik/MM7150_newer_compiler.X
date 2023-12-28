@@ -4,7 +4,7 @@
 void ConfigTimer(void)
 {    
     T2CONbits.TCKPS= 0b000;
-    PR2= 399; //40 kHz
+    PR2= 799; //20 kHz
     TMR2= 0;
     
 //    T3CONbits.TCKPS= 0b110;

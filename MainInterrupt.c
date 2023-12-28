@@ -41,13 +41,13 @@ void __ISR(_TIMER_2_VECTOR, IPL7SRS) Timer2Handler(void)
     {   
         //odczytaj wynik
         sprintf(tx_buff,"Inclinometer Y: %hi\n\r\0", InclinometerY);
-        PeriodGlobal= 0;     
+        PeriodGlobal= 0;
     }
     
     if(int_cnt == 40)
-    {
-        UART_send(tx_buff);
-    }
-    
+        {
+            UART_send(tx_buff);
+            int_cnt = 0;
+        }
     
 }

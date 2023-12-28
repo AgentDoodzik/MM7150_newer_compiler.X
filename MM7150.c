@@ -4898,7 +4898,7 @@ static inline void ConfigI2C4(void)
     I2C4TRN= 0x00;
     I2C4RCV= 0x00;
     I2C4BRG= 0;
-    I2C4BRG= 0x10; //400kHz przy 16 MHz cz. taktowania, wg wzoru z dokument.
+    I2C4BRG= 0x0012; //400kHz przy 16 MHz cz. taktowania, wg wzoru z dokument.
     //I2C4CONbits.DISSLW = 1; //slew  rate control disabled for standard speed (100 kHz) mode
     //I2C4CONbits.RCEN = 1;
 }
@@ -4938,9 +4938,9 @@ void MM7150attendance(void)
             
         case IdleIMU:
             Wait++;
-            if(Wait==40001)
-                Wait= 40000;
-            if(Wait==40000)
+            if(Wait==20001)
+                Wait= 20000;
+            if(Wait==20000)
             {
                 if(IMUReadReqest==0xF)
                 {
@@ -5009,7 +5009,7 @@ void MM7150attendance(void)
             else
             {
                 Wait5s++;
-                if(Wait5s==100000)
+                if(Wait5s==50000)
                 {
                     IMUstate= I2Cunconfigured;
                     //Log error 
@@ -5056,7 +5056,7 @@ void MM7150attendance(void)
             else
             {
                 Wait5s++;
-                if(Wait5s==100000)
+                if(Wait5s==50000)
                 {
                     IMUstate= I2Cunconfigured;
                     //Log error 
@@ -5077,7 +5077,7 @@ void MM7150attendance(void)
             else
             {
                 Wait5s++;
-                if(Wait5s==100000)
+                if(Wait5s==50000)
                 {
                     IMUstate= I2Cunconfigured;
                     //Log error 
@@ -5102,7 +5102,7 @@ void MM7150attendance(void)
             else
             {
                 Wait5s++;
-                if(Wait5s==100000)
+                if(Wait5s==50000)
                 {
                     IMUstate= I2Cunconfigured;
                     //Log error 
@@ -5137,7 +5137,7 @@ void MM7150attendance(void)
             else
             {
                 Wait5s++;
-                if(Wait5s==100000)
+                if(Wait5s==50000)
                 {
                     IMUstate= I2Cunconfigured;
                     //Log error 
@@ -5154,7 +5154,7 @@ void MM7150attendance(void)
             else
             {
                 Wait5s++;
-                if(Wait5s==100000)
+                if(Wait5s==50000)
                 {
                     IMUstate= I2Cunconfigured;
                     //Log error 
@@ -5171,7 +5171,7 @@ void MM7150attendance(void)
             else
             {
                 Wait5s++;
-                if(Wait5s==100000)
+                if(Wait5s==50000)
                 {
                     IMUstate= I2Cunconfigured;
                     //Log error 
@@ -5238,7 +5238,7 @@ void MM7150attendance(void)
             else
             {
                 Wait5s++;
-                if(Wait5s==100000)
+                if(Wait5s==50000)
                 {
                     IMUstate= I2Cunconfigured;
                     //Log error 
@@ -5272,7 +5272,7 @@ void MM7150attendance(void)
             }           
             LastIntState= IntPin;              
             Wait5s++;
-            if(Wait5s==100000)
+            if(Wait5s==50000)
             {
                 IMUstate= I2Cunconfigured;
                 //Log error 
@@ -5289,7 +5289,7 @@ void MM7150attendance(void)
             else
             {
                 Wait5s++;
-                if(Wait5s==100000)
+                if(Wait5s==50000)
                 {
                     IMUstate= I2Cunconfigured;
                     //Log error 
@@ -5315,7 +5315,7 @@ void MM7150attendance(void)
             else
             {
                 Wait5s++;
-                if(Wait5s==100000)
+                if(Wait5s==50000)
                 {
                     IMUstate= I2Cunconfigured;
                     //Log error 
@@ -5337,7 +5337,7 @@ void MM7150attendance(void)
             else
             {
                 Wait5s++;
-                if(Wait5s==100000)
+                if(Wait5s==50000)
                 {
                     IMUstate= I2Cunconfigured;
                     //Log error 
@@ -5359,7 +5359,7 @@ void MM7150attendance(void)
             else
             {
                 Wait5s++;
-                if(Wait5s==100000)
+                if(Wait5s==50000)
                 {
                     IMUstate= I2Cunconfigured;
                     //Log error 
@@ -5390,7 +5390,7 @@ void MM7150attendance(void)
             else
             {
                 Wait5s++;
-                if(Wait5s==100000)
+                if(Wait5s==50000)
                 {
                     IMUstate= I2Cunconfigured;
                     //Log error 
@@ -5412,7 +5412,7 @@ void MM7150attendance(void)
             else
             {
                 Wait5s++;
-                if(Wait5s==100000)
+                if(Wait5s==50000)
                 {
                     IMUstate= I2Cunconfigured;
                     //Log error 
@@ -5437,7 +5437,7 @@ void MM7150attendance(void)
             else
             {
                 Wait5s++;
-                if(Wait5s==100000)
+                if(Wait5s==50000)
                 {
                     IMUstate= I2Cunconfigured;
                     //Log error 
@@ -5459,7 +5459,7 @@ void MM7150attendance(void)
             else
             {
                 Wait5s++;
-                if(Wait5s==100000)
+                if(Wait5s==50000)
                 {
                     IMUstate= I2Cunconfigured;
                     //Log error 
@@ -5481,7 +5481,7 @@ void MM7150attendance(void)
             else
             {
                 Wait5s++;
-                if(Wait5s==100000)
+                if(Wait5s==50000)
                 {
                     IMUstate= I2Cunconfigured;
                     //Log error 
@@ -5503,7 +5503,7 @@ void MM7150attendance(void)
             else
             {
                 Wait5s++;
-                if(Wait5s==100000)
+                if(Wait5s==50000)
                 {
                     IMUstate= I2Cunconfigured;
                     //Log error 
@@ -5525,7 +5525,7 @@ void MM7150attendance(void)
             else
             {
                 Wait5s++;
-                if(Wait5s==100000)
+                if(Wait5s==50000)
                 {
                     IMUstate= I2Cunconfigured;
                     //Log error 
@@ -5547,7 +5547,7 @@ void MM7150attendance(void)
             else
             {
                 Wait5s++;
-                if(Wait5s==100000)
+                if(Wait5s==50000)
                 {
                     IMUstate= I2Cunconfigured;
                     //Log error 
@@ -5569,7 +5569,7 @@ void MM7150attendance(void)
             else
             {
                 Wait5s++;
-                if(Wait5s==100000)
+                if(Wait5s==50000)
                 {
                     IMUstate= I2Cunconfigured;
                     //Log error 
@@ -5591,7 +5591,7 @@ void MM7150attendance(void)
             else
             {
                 Wait5s++;
-                if(Wait5s==100000)
+                if(Wait5s==50000)
                 {
                     IMUstate= I2Cunconfigured;
                     //Log error 
@@ -5622,7 +5622,7 @@ void MM7150attendance(void)
             else
             {
                 Wait5s++;
-                if(Wait5s==100000)
+                if(Wait5s==50000)
                 {
                     IMUstate= I2Cunconfigured;
                     //Log error 
@@ -5643,7 +5643,7 @@ void MM7150attendance(void)
             else
             {
                 Wait5s++;
-                if(Wait5s==100000)
+                if(Wait5s==50000)
                 {
                     IMUstate= I2Cunconfigured;
                     //Log error 
@@ -5660,7 +5660,7 @@ void MM7150attendance(void)
             else
             {
                 Wait5s++;
-                if(Wait5s==100000)
+                if(Wait5s==50000)
                 {
                     IMUstate= I2Cunconfigured;
                     //Log error 
@@ -5717,7 +5717,7 @@ void MM7150attendance(void)
             else
             {
                 Wait5s++;
-                if(Wait5s==100000)
+                if(Wait5s==50000)
                 {
                     IMUstate= I2Cunconfigured;
                     //Log error 

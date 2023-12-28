@@ -84,7 +84,7 @@
 //Czestotliwosc zegara sysclk - 32 MHz
 //PBCLK2 i PBCLK3 - 16 MHz (SYSCLK/2)
 char tx_buff[100];
-uint8_t int_cnt = 0;
+uint16_t int_cnt = 0;
 unsigned int main(void)
 {       
     ConfigPerformance();
