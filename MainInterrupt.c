@@ -20,6 +20,7 @@
 #include "UART_user.h"
 #include "MM7150user.h"
 #include "MM7150globalvars.h"
+#include "servo.h"
 
 
 //******************************************************************************
@@ -28,27 +29,32 @@
 int spf_sucess = 0;
 int tx1_end = 0;
 int tx2_end = 0;
-
+signed short InclinometerY_to_send = 0;
 
 void __ISR(_TIMER_2_VECTOR, IPL7SRS) Timer2Handler(void)
 {
     IFS0bits.T2IF= 0;   
     int_cnt++;
    // IMUReadReqest= 0xF;
-    MM7150attendance();  
+    MM7150attendance();
+     if(PeriodGlobal>0)   
+        {   
+          
+            PeriodGlobal= 0;
+        }
     
-    if(PeriodGlobal>0)
-    {   
-        //odczytaj wynik
-        sprintf(tx_buff,"Inclinometer Y: %hi\n\r\0", InclinometerY);
+         InclinometerY_to_send = InclinometerY;
+         sine_val =PWM_sine_wave_read_1();
+         PWM_1_update(sine_val*5045 + 18498); //5045 18498
+         PWM_2_update(sine_val*6496+ 28545); //6496 28545
+    
+    if(int_cnt == 200)   
+    {
+        sprintf(tx_buff, "%hi, %.2lf\n\r\0", InclinometerY_to_send, sine_val);
         UART_send(tx_buff);
-        PeriodGlobal= 0;
+        int_cnt = 0;
+        
     }
-    
-//    if(int_cnt == 200)
-//        {
-//            UART_send(tx_buff);
-//            int_cnt = 0;
-//        }
-    
+ \
+
 }

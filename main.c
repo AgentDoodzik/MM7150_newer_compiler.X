@@ -12,6 +12,8 @@
 #include "InitPIC.h"
 #include "UART_user.h"
 #include "MM7150config.h"
+#include "servo.h"
+#include "DMA.h"
 #include <stdio.h>
 
 // PIC32MZ2048EFH064 Configuration Bit Settings
@@ -85,12 +87,15 @@
 /*  ############ */
 char tx_buff[100];
 uint16_t int_cnt = 0;
+float sine_val = 0.0;
+
 unsigned int main(void)
 //******************************************************************************
 //* M A I N  F U N C T I O N 
 //******************************************************************************
 
 {       
+    
     ConfigPerformance();
     IMUReadReqest= 0xF; //set 0xf to read
     ConfigTimer();
@@ -98,6 +103,10 @@ unsigned int main(void)
     ODCBbits.ODCB3= 1;
 //    CNPUBbits.CNPUB3= 1;
     ConfigINT();
+    freq_set(1);
+    PWM_1_conf(24024, 1);
+    PWM_2_conf(21020, 1);
+    PWM_sine_wave_conf(1);
     OnINT();
     GlobalINTon();
     ConfigPPS();
@@ -105,9 +114,12 @@ unsigned int main(void)
     OnOC();
     ConfigIO();
     Wake_Config_Enable();
-    OnTimer2();
+    //config_DMA();
+    //DMA_enable();
     OnTimer3();
-   UART();
+    OnTimer2();
+    UART();
+    
     
     while(1)
     {

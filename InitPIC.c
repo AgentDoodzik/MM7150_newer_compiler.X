@@ -38,17 +38,19 @@ void OnTimer2(void)
 }
 void OnTimer3(void)
 {
-    //T3CONbits.ON= 1;
+    T3CONbits.ON= 1;
 }
 void ConfigINT(void)
 {
     INT4Rbits.INT4R = 0b1000;
     INTCONbits.MVEC= 1; //MULTIPLE VECTORS
+    IPC33bits.DMA0IP = 6;
     IPC2bits.T2IP= 7;
     IPC2bits.T2IS= 3;
 }
 void OnINT(void)
 {
+    IEC4bits.DMA0IE = 1;
     IFS0bits.T2IF= 0;
     IEC0bits.T2IE= 1;
 }
