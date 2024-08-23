@@ -3,20 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Users/macie/MPLABXProjects/MM7150_newer_compiler.X/MM7150.c</file>
+            <file>file:/C:/Users/macie/MPLABXProjects/MM7150_newer_compiler.X/UART_user.c</file>
             <file>file:/C:/Users/macie/MPLABXProjects/MM7150_newer_compiler.X/main.c</file>
             <file>file:/C:/Users/macie/MPLABXProjects/MM7150_newer_compiler.X/servo.c</file>
-            <file>file:/C:/Users/macie/MPLABXProjects/MM7150_newer_compiler.X/mikser.h</file>
-            <file>file:/C:/Users/macie/MPLABXProjects/MM7150_newer_compiler.X/MM7150globalvars.h</file>
             <file>file:/C:/Users/macie/MPLABXProjects/MM7150_newer_compiler.X/MainInterrupt.c</file>
-            <file>file:/C:/Users/macie/MPLABXProjects/MM7150_newer_compiler.X/MM7150config.h</file>
-            <file>file:/C:/Users/macie/MPLABXProjects/MM7150_newer_compiler.X/DMA.c</file>
-            <file>file:/C:/Users/macie/MPLABXProjects/MM7150_newer_compiler.X/MM7150.c</file>
-            <file>file:/C:/Users/macie/MPLABXProjects/MM7150_newer_compiler.X/DMA.h</file>
-            <file>file:/C:/Users/macie/MPLABXProjects/MM7150_newer_compiler.X/UART_user.c</file>
-            <file>file:/C:/Users/macie/MPLABXProjects/MM7150_newer_compiler.X/MM7150user.h</file>
-            <file>file:/C:/Users/macie/MPLABXProjects/MM7150_newer_compiler.X/UART_user.h</file>
             <file>file:/C:/Users/macie/MPLABXProjects/MM7150_newer_compiler.X/InitPIC.c</file>
             <file>file:/C:/Users/macie/MPLABXProjects/MM7150_newer_compiler.X/servo.h</file>
+            <file>file:/C:/Users/macie/MPLABXProjects/MM7150_newer_compiler.X/DMA.c</file>
         </group>
     </open-files>
 </project-private>

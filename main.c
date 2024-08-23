@@ -85,9 +85,9 @@
 //Czestotliwosc zegara sysclk - 32 MHz
 //PBCLK2 i PBCLK3 - 16 MHz (SYSCLK/2)
 /*  ############ */
-char tx_buff[100];
+uint8_t __attribute__ ((coherent, aligned(16))) tx_buff[10];
 uint16_t int_cnt = 0;
-float sine_val = 0.0;
+volatile float sine_val = 0.0;
 
 unsigned int main(void)
 //******************************************************************************
@@ -114,19 +114,18 @@ unsigned int main(void)
     OnOC();
     ConfigIO();
     Wake_Config_Enable();
-    //config_DMA();
-    //DMA_enable();
+    config_DMA();
     OnTimer3();
     OnTimer2();
     UART();
+    DMA_enable();
     
     
     while(1)
     {
-//      if(PORTBbits.RB3 == 1)
-//      {
-//          IntPin == 1;
-//      }
+        //sine_val =PWM_sine_wave_read_1();
+//        PWM_1_update(sine_val*5045 + 18498); //5045 18498
+//        PWM_2_update(-sine_val*6496+ 28545); //6496 28545
           
     }
     return 0;
