@@ -26,7 +26,7 @@ extern unsigned short Compass; // COMPASS 0-360 DEGREES
 //extern int16_t Compass; 
 
 extern uint16_t int_cnt; //uart 1kHz counter variable
-extern uint8_t __attribute__ ((coherent, aligned(16))) tx_buff[10]; //uart buffer
+extern uint8_t __attribute__ ((coherent, aligned(16))) tx_buff[6]; //uart buffer
 extern volatile float sine_val;
 
 #ifdef	__cplusplus
