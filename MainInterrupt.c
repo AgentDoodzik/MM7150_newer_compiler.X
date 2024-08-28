@@ -26,14 +26,9 @@
 //******************************************************************************
 //* M A I N  I N T E R R U P T  H A N D L E R                                 
 //******************************************************************************
-int spf_sucess = 0;
-int tx1_end = 0;
-int tx2_end = 0;
 uint8_t __attribute__ ((coherent, aligned(16))) tx_buff[6] = {0};
 signed short InclinometerY_to_send = 0;
 float sine_val_tmp;
-
-extern uint8_t tx_buff[10];
 
 void __ISR(_TIMER_2_VECTOR, IPL7SRS) Timer2Handler(void)
 {

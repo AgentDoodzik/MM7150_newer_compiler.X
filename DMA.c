@@ -32,7 +32,7 @@ void config_DMA(void)
     IPC33bits.DMA0IP = 5;
     //DCH0ECONbits.CHSIRQ = 134; //#134 - DMA channel dest done #181 UART5 TX transfer done interrupt starts the transfer, #28 - Timer 6 triggers dma trn.
     //DCH0ECONbits.SIRQEN = 1; //start the transfer when the interrupt above occurs
-    DCH0DAT = '\r'; //termination mark - null - stops the transfer
+    DCH0DAT = 0xB; //termination mark - null - stops the transfer
     DCH0ECONbits.PATEN = 1; //enable pattern termination functionality
     
     //KVA_TO_PA - convert virtual adress of a variable to physical
@@ -52,6 +52,6 @@ void DMA_enable(void)
 {
     DMACONbits.ON = 1; //enable the module
     //IEC4bits.DMA0IE = 1;
-    DCH0CONbits.CHEN = 1; //enable ch0
+    //DCH0CONbits.CHEN = 1; //enable ch0
     //DCH0ECONbits.CFORCE = 1; //force first transfer
 }
