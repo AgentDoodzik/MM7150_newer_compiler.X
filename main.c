@@ -85,7 +85,6 @@
 //Czestotliwosc zegara sysclk - 32 MHz
 //PBCLK2 i PBCLK3 - 16 MHz (SYSCLK/2)
 /*  ############ */
-uint8_t __attribute__ ((coherent, aligned(16))) tx_buff[10];
 uint16_t int_cnt = 0;
 volatile float sine_val = 0.0;
 

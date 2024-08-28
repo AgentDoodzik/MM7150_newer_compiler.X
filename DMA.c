@@ -52,6 +52,6 @@ void DMA_enable(void)
 {
     DMACONbits.ON = 1; //enable the module
     //IEC4bits.DMA0IE = 1;
-    //DCH0CONbits.CHEN = 1; //enable ch0
+    DCH0CONbits.CHEN = 1; //enable ch0
     //DCH0ECONbits.CFORCE = 1; //force first transfer
 }

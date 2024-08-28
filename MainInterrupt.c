@@ -26,7 +26,7 @@
 //******************************************************************************
 //* M A I N  I N T E R R U P T  H A N D L E R                                 
 //******************************************************************************
-uint8_t __attribute__ ((coherent, aligned(16))) tx_buff[6] = {0};
+uint8_t __attribute__ ((coherent, aligned(16))) tx_buff[6];
 signed short InclinometerY_to_send = 0;
 float sine_val_tmp;
 
@@ -72,5 +72,5 @@ void __ISR(_TIMER_2_VECTOR, IPL7SRS) Timer2Handler(void)
  \
 }
     
-}
+
 
