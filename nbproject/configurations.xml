@@ -30,6 +30,7 @@
       <itemPath>UART_user.c</itemPath>
       <itemPath>servo.c</itemPath>
       <itemPath>DMA.c</itemPath>
+      <itemPath>dataTransferInterrupt.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -49,7 +50,7 @@
         <targetDevice>PIC32MZ2048EFH064</targetDevice>
         <targetHeader></targetHeader>
         <targetPluginBoard></targetPluginBoard>
-        <platformTool>PICkit3PlatformTool</platformTool>
+        <platformTool>ICD4Tool</platformTool>
         <languageToolchain>XC32</languageToolchain>
         <languageToolchainVersion>4.10</languageToolchainVersion>
         <platform>3</platform>

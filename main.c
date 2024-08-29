@@ -116,6 +116,7 @@ unsigned int main(void)
     config_DMA();
     OnTimer3();
     OnTimer2();
+    OnTimer6();
     UART();
     DMA_enable();
     

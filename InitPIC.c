@@ -7,9 +7,9 @@ void ConfigTimer(void)
     PR2= 799; //20 kHz
     TMR2= 0;
     
-//    T3CONbits.TCKPS= 0b110;
-//    PR3= 4999; //50Hz
-//    TMR3= 0;
+    T6CONbits.TCKPS=0b000;
+    PR6 = 0x3E7F; //1 kHz - UART transfer initiation
+
 }
  void AllPortsDigital(void)
 {
@@ -40,19 +40,35 @@ void OnTimer3(void)
 {
     T3CONbits.ON= 1;
 }
+
+void OnTimer6(void)
+{
+    T6CONbits.ON = 1;
+    IEC0bits.T6IE = 1;
+}
 void ConfigINT(void)
 {
     INT4Rbits.INT4R = 0b1000;
     INTCONbits.MVEC= 1; //MULTIPLE VECTORS
     IPC33bits.DMA0IP = 6;
+    
+    //setting interrupt priorities
+    //interrupts have the same priorities but different subprio's
+    //If they are triggerd simultaneously, the one with higher suprio will
+    //be handled first
     IPC2bits.T2IP= 7;
     IPC2bits.T2IS= 3;
+    IPC7bits.T6IP = 7;
+    IPC7bits.T6IS = 2;
+    
 }
 void OnINT(void)
 {
     IEC4bits.DMA0IE = 1;
     IFS0bits.T2IF= 0;
+    IFS0bits.T6IF = 0;
     IEC0bits.T2IE= 1;
+    IEC0bits.T6IE = 1;
 }
 void GlobalINTon(void)
 {
