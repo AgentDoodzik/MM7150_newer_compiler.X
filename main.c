@@ -86,7 +86,7 @@
 //PBCLK2 i PBCLK3 - 16 MHz (SYSCLK/2)
 /*  ############ */
 uint16_t int_cnt = 0;
-volatile float sine_val = 0.0;
+
 
 unsigned int main(void)
 //******************************************************************************

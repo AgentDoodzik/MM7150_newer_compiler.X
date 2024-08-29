@@ -1,5 +1,6 @@
 #include <xc.h>
 
+#include "UART_user.h"
 #include <string.h>
 #include <stdio.h>
 #include "p32mz2048efh064.h"      
@@ -8,9 +9,10 @@
 #include <sys/attribs.h>
 
 uint8_t volatile __attribute__ ((coherent, aligned(16))) tx_buff[6];
+char temp_tx[20];
 char __attribute__ ((coherent, aligned(16))) char_tx_buff[20];
 signed short InclinometerY_to_send = 0;
-float sine_val_tmp;
+volatile float sine_val = 0.0;
 
 void __ISR_AT_VECTOR(_TIMER_6_VECTOR, IPL7SRS) timer6Handler(void)
 {
@@ -23,15 +25,13 @@ void __ISR_AT_VECTOR(_TIMER_6_VECTOR, IPL7SRS) timer6Handler(void)
          PWM_1_update(sine_val*5045 + 18498); //5045 18498
          PWM_2_update(-sine_val*6496+ 28545); //6496 28545
          
-         sprintf(char_tx_buff,"%d, %.2f\n\r\0", InclinometerY_to_send, sine_val);
+         sprintf(char_tx_buff,"%d,%d\n\r", InclinometerY_to_send, (int16_t)(sine_val*1000));
+         //UART_send(temp_tx);
+         
         
          DCH0ECONbits.CFORCE = 1; //manually DMA transfer launch
          
-//         for(int i = 0; i<strlen(char_tx_buff)+1;)
-//         {
-//             U2TXREG = char_tx_buff[i++];
-//         }
-        
+
        
         
     }

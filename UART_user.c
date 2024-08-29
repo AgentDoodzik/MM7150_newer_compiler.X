@@ -18,7 +18,7 @@ void UART() //konfiguracja
     //PBCLK2 = 16 MHz
     
     U2MODEbits.BRGH = 0;
-    U2BRG= (((16000000)/(16*115200))-1);
+    U2BRG= (((16000000)/(16*57600))-1);
     U2STAbits.UTXEN=1;
     U2STAbits.URXEN=0;
     U2MODEbits.PDSEL=0;

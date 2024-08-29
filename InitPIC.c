@@ -8,6 +8,7 @@ void ConfigTimer(void)
     TMR2= 0;
     
     T6CONbits.TCKPS=0b000;
+    //PR6 = 0xF423; //1Hz frequency - testing only
     PR6 = 0x3E7F; //1 kHz - UART transfer initiation
 
 }
