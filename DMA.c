@@ -41,7 +41,7 @@ void config_DMA(void)
     DCH0DSA= KVA_TO_PA(dest_address_kseg1); //set destination physical address
     
     DCH0SSIZ= 21; // source size 15+1 bytes
-    DCH0CSIZ = 16;
+    DCH0CSIZ = 8;
     DCH0DSIZ= 1; // destination size 1 bytes
     DCH0CONbits.CHAEN = 1; //re-enable the DMA after a transfer if there is still something to transmit
     
