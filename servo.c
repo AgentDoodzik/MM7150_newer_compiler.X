@@ -59,8 +59,9 @@ void PWM_sine_wave_conf(uint8_t on){ //Sine wave generation
     TMR4 = 0x0000;
     TMR5 = 0x0;
     
-    PR4 = 624999;//624999;// sine frequency 0.1Hz
-    //PR4 = 124999; //2s 0.5Hz
+    PR4 = 0x3D08;//624999;// sine frequency 0.1Hz
+    //0x7A11 2Hz  0xF423 1 Hz  0x1E847 0.5 Hz 0x3D08F - 0.25 0x5B5EA - 0.167 Hz,  0x7A11F - 0.125 Hz,  124999; //2s 0.5Hz
+    //0x3D08 - 4 Hz
     T4CONbits.TCKPS = 0b111; //1:256 prescaler to prevent overflow
     
     T4CONbits.ON = on;
