@@ -60,9 +60,9 @@ void PWM_sine_wave_conf(uint8_t on){ //Sine wave generation
     TMR5 = 0x0;
     
     PR4 = 0x3D08;//624999;// sine frequency 0.1Hz
-    //0x7A11 2Hz  0xF423 1 Hz  0x1E847 0.5 Hz 0x3D08F - 0.25 0x5B5EA - 0.167 Hz,  0x7A11F - 0.125 Hz,  124999; //2s 0.5Hz
+    //0x7A11 2Hz  0xF423 1 Hz   0x14584 0.75 Hz   0x1E847 0.5 Hz 0x3D08F - 0.25 0x5B5EA - 0.167 Hz,  0x7A11F - 0.125 Hz,  124999; //2s 0.5Hz
     //0x3D08 - 4 Hz
-    T4CONbits.TCKPS = 0b111; //1:256 prescaler to prevent overflow
+    T4CONbits.TCKPS = 0b111; //1:256 prescaler to prevent variable overflow
     
     T4CONbits.ON = on;
     
@@ -74,7 +74,6 @@ float PWM_sine_wave_read_1(void) //read the sine wave value - servos on glider's
 {
     //return (uint16_t)round(6496 * sin(2 * M_PI * (1./(PR4+PR5)) * (TMR4+TMR5+(124999/2))) + 28545);   //start 24024
     return sin(2.0 * M_PI * (1./(PR4+PR5)) * (TMR4+TMR5));
-    //28000 looks good
 }
 
 uint16_t PWM_sine_wave_read_2(void)//read the sine wave value - servos on glider's right(left?) side
