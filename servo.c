@@ -32,137 +32,117 @@
 /* wlacz/ wylacz timer */
 void freq_set(uint8_t on)
 {
-    T2CONbits.ON = 0; 
-    TMR2 = 0x0000;
-    PR2 = 1500; //czestotliwosc sygnalu pwm - 333 Hz
-    T2CONbits.T32 = 0;
-    T2CONbits.TCKPS = 0b101; //preskaler timera 1:32
-    T2CONbits.TCS = 0;
-    T2CONbits.ON = on;
+    CFGCONbits.OCACLK = 0;
+    T3CON = 0x0; //clear the control register for config
+    TMR3 = 0x0000;
+    PR3 = 48047; //Servo base frequency 333 Hz
+    T3CONbits.TCKPS = 0b000; //timer prescaler 1:1
+    T3CONbits.TCS = 0; //gated time accumulation disabled
+    T3CONbits.ON = on; // enable/disable the timer
 
 }
 
+void PWM_sine_wave_conf(uint8_t on){ //Sine wave generation
+    
+    /*
+     * This function changes the duty cycle according to a sine wave value
+     * 
+     */
+    
+    //timer control registers disabled for config
+    T4CON = 0x0;
+    T5CON = 0x0;
+    
+    T4CONbits.T32 = 1; //32 bit timer mode (Timer 4 + Timer 5 work together)
+    
+    //timer start value
+    TMR4 = 0x0000;
+    TMR5 = 0x0;
+    
+    PR4 = 0x3D08;//624999;// sine frequency 0.1Hz
+    //0x7A11 2Hz  0xF423 1 Hz   0x14584 0.75 Hz   0x1E847 0.5 Hz 0x3D08F - 0.25 0x5B5EA - 0.167 Hz,  0x7A11F - 0.125 Hz,  124999; //2s 0.5Hz
+    //0x3D08 - 4 Hz
+    T4CONbits.TCKPS = 0b111; //1:256 prescaler to prevent variable overflow
+    
+    T4CONbits.ON = on;
+    
+   //return (uint16_t)round(350 * sin(2 * M_PI * (1./624999) * (TMR4 + TMR5)) + 750);  
+  
+}
 
-/* funkcja PWM_x_set - USTAWIENIE MODULOW PWM NA POCZATKU*/
+float PWM_sine_wave_read_1(void) //read the sine wave value - servos on glider's left(right?) side
+{
+    //return (uint16_t)round(6496 * sin(2 * M_PI * (1./(PR4+PR5)) * (TMR4+TMR5+(124999/2))) + 28545);   //start 24024
+    return sin(2.0 * M_PI * (1./(PR4+PR5)) * (TMR4+TMR5));
+}
+
+uint16_t PWM_sine_wave_read_2(void)//read the sine wave value - servos on glider's right(left?) side
+{
+    //return (uint16_t)round(5045 * sin(2 * M_PI * (1./(PR4+PR5)) * (TMR4+TMR5)) + 18498);  
+}
+
+
+/* funkcja PWM_x_conf - USTAWIENIE MODULOW PWM NA POCZATKU*/
 
 void PWM_1_conf(uint16_t duty_var, uint8_t on)
 {
     //ograniczenie wartosci wsp. wypelnienia (SATURATION)
-    if(duty_var > 1100 )
-        duty_var = 1100;
-    else 
-        if(duty_var < 400)
-            duty_var = 400;
+//    if(duty_var > 1100 ) //NEEDS ADJUSTMENT
+//        duty_var = 1100;
+//    else 
+//        if(duty_var < 400)
+//            duty_var = 400;
     
     
-    TRISDbits.TRISD1 = 0; // RPD1 jako wyjscie
-    RPD1Rbits.RPD1R = 0b1100; //tryb OC1
+    TRISBbits.TRISB9 = 0; // RPD1 jako wyjscie
+    RPB9Rbits.RPB9R = 0b1011; //tryb OC3
     
     
-    OC1CONbits.ON = 0; //na czas konfiguracjy wylaczamy PWM
-    OC1CONbits.OCTSEL = 0; //wybor timera 2
-    OC1CONbits.OCM = 0b110; // tryb PWM
-    OC1RS = duty_var; 
-    OC1CONbits.ON = on; //wlaczenie/wylaczenie pwm
+    OC3CONbits.ON = 0; //na czas konfiguracjy wylaczamy PWM
+    OC3CONbits.OCTSEL = 1; //wybor timera 3
+    OC3CONbits.OCM = 0b110; // tryb PWM
+    OC3RS = duty_var; 
+    OC3CONbits.ON = on; //wlaczenie/wylaczenie pwm
     
 }
 
 void PWM_2_conf(uint16_t duty_var, uint8_t on)
 {
     //ograniczenie wartosci wsp. wypelnienia
-    if(duty_var > 1100 )
-        duty_var = 1100;
-    else 
-        if(duty_var < 400)
-            duty_var = 400;
+//    if(duty_var > 1100 ) NEEDS ADJUSTMENT
+//        duty_var = 1100;
+//    else 
+//        if(duty_var < 400)
+//            duty_var = 400;
     
-    TRISDbits.TRISD0 = 0; // RPD0 jako wyjscie
-    RPD0Rbits.RPD0R = 0b1011; //tryb OC2
+    TRISBbits.TRISB10 = 0; // RPB10 jako wyjscie
+    RPB10Rbits.RPB10R = 0b1100; //tryb OC6
     
     
-    OC2CONbits.ON = 0; //na czas konfiguracjy wylaczamy PWM
-    OC2CONbits.OCTSEL = 0; //wybor timera 2
-    OC2CONbits.OCM = 0b110; // tryb PWM
-    OC2RS = duty_var; 
-    OC2CONbits.ON = on; //wlaczenie/wylaczenie pwm
+    OC6CONbits.ON = 0; //na czas konfiguracjy wylaczamy PWM
+    OC6CONbits.OCTSEL = 1; //wybor timera 3
+    OC6CONbits.OCM = 0b110; // tryb PWM
+    OC6RS = duty_var; 
+    OC6CONbits.ON = on; //wlaczenie/wylaczenie pwm
 }
 
 void PWM_3_conf(uint16_t duty_var, uint8_t on)
 {
-    //ograniczenie wartosci wsp. wypelnienia
-    if(duty_var > 1100 )
-        duty_var = 1100;
-    else 
-        if(duty_var < 400)
-            duty_var = 400;
-    
-    TRISDbits.TRISD10 = 0; // RPD0 jako wyjscie
-    RPD10Rbits.RPD10R = 0b1011; //tryb OC3
-    
-    OC3CONbits.ON = 0; //na czas konfiguracjy wylaczamy PWM
-    OC3CONbits.OCTSEL = 0; //wybor timera 2
-    OC3CONbits.OCM = 0b110; // tryb PWM
-    OC3RS = duty_var;  
-    OC3CONbits.ON = on; //wlaczenie/wylaczenie pwm
-    
+
 }
 
 void PWM_4_conf(uint16_t duty_var, uint8_t on)
 {
-    //ograniczenie wartosci wsp. wypelnienia
-    if(duty_var > 1100 )
-        duty_var = 1100;
-    else 
-        if(duty_var < 400)
-            duty_var = 400;
-    
-    TRISFbits.TRISF5 = 0; // RPD0 jako wyjscie
-    RPF5Rbits.RPF5R = 0b1011; //tryb OC4
-    
-    OC4CONbits.ON = 0; //na czas konfiguracjy wylaczamy PWM
-    OC4CONbits.OCTSEL = 0; //wybor timera 2
-    OC4CONbits.OCM = 0b110; // tryb PWM
-    OC4RS = duty_var; 
-    OC4CONbits.ON = on; //wlaczenie/wylaczenie pwm
 
 }
 
 void PWM_5_conf(uint16_t duty_var, uint8_t on)
 {
-    //ograniczenie wartosci wsp. wypelnienia
-    if(duty_var > 1100 )
-        duty_var = 1100;
-    else 
-        if(duty_var < 400)
-            duty_var = 400;
-    
-    TRISDbits.TRISD9 = 0; // RPD0 jako wyjscie
-    RPD9Rbits.RPD9R = 0b1011; //tryb OC5
-    
-    OC5CONbits.ON = 0; //na czas konfiguracjy wylaczamy PWM
-    OC5CONbits.OCTSEL = 0; //wybor timera 2
-    OC5CONbits.OCM = 0b110; // tryb PWM
-    OC5RS = duty_var; 
-    OC5CONbits.ON = on; //wlaczenie/wylaczenie pwm
+   
 }
 
 void PWM_6_conf(uint16_t duty_var, uint8_t on)
 {
-    //ograniczenie wartosci wsp. wypelnienia
-    if(duty_var > 1100 )
-        duty_var = 1100;
-    else 
-        if(duty_var < 400)
-            duty_var = 400;
-    
-    TRISFbits.TRISF4 = 0; // RPF4 jako wyjscie
-    RPF4Rbits.RPF4R = 0b1100; //tryb OC6
-    
-    OC6CONbits.ON = 0; //na czas konfiguracjy wylaczamy PWM
-    OC6CONbits.OCTSEL = 0; //wybor timera 2
-    OC6CONbits.OCM = 0b110; // tryb PWM
-    OC6RS = duty_var; 
-    OC6CONbits.ON = on; //wlaczenie/wylaczenie pwm
 
 }
 
@@ -170,37 +150,44 @@ void PWM_6_conf(uint16_t duty_var, uint8_t on)
 // funkcje PWM_x_update - funkcje do sterowania serwam (zmiana wsp. wypelnienia "w locie")
 void PWM_1_update(uint16_t new_duty_var)
 {
-    
-    OC1RS = new_duty_var;
+        //ograniczenie wartosci wsp. wypelnienia
+//    if(duty_var > 1100 ) NEEDS ADJUSTMENT
+//        duty_var = 1100;
+//    else 
+//        if(duty_var < 400)
+//            duty_var = 400;
+    OC3RS = new_duty_var; 
 }
 
 void PWM_2_update(uint16_t new_duty_var)
 {
-    OC2RS = new_duty_var;
+            //ograniczenie wartosci wsp. wypelnienia
+//    if(duty_var > 1100 ) NEEDS ADJUSTMENT
+//        duty_var = 1100;
+//    else 
+//        if(duty_var < 400)
+//            duty_var = 400;
+    OC6RS = new_duty_var; 
 }
 
 void PWM_3_update(uint16_t new_duty_var)
 {
     
-    OC3RS = new_duty_var;
 }
 
 void PWM_4_update(uint16_t new_duty_var)
 {
     
-    OC4RS = new_duty_var;
 }
 
 void PWM_5_update(uint16_t new_duty_var)
 {
     
-    OC5RS = new_duty_var;
 }
 
 void PWM_6_update(uint16_t new_duty_var)
 {
-    
-    OC6RS = new_duty_var;
+  
 }
 
 

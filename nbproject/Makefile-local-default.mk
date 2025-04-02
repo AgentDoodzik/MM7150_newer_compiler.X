@@ -35,4 +35,4 @@ MP_AS_DIR="C:\Program Files\Microchip\xc32\v4.10\bin"
 MP_LD_DIR="C:\Program Files\Microchip\xc32\v4.10\bin"
 MP_AR_DIR="C:\Program Files\Microchip\xc32\v4.10\bin"
 # MP_BC_DIR is not defined
-DFP_DIR=C:/Program Files/Microchip/MPLABX/v6.00/packs/Microchip/PIC32MZ-EF_DFP/1.3.58
+DFP_DIR=C:/Users/macie/.mchp_packs/Microchip/PIC32MZ-EF_DFP/1.4.168

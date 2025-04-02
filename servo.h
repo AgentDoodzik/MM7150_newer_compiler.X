@@ -52,7 +52,9 @@ void PWM_6_update(uint16_t new_duty_var);
 
 void PWM_W_update(uint16_t new_duty_var);
 
-
+void PWM_sine_wave_conf(uint8_t on);
+float PWM_sine_wave_read_1(void);
+uint16_t PWM_sine_wave_read_2(void);//read the sine wave value - servos on glider's right(left?) side
 
 #endif	/* SERVO_H */
 

@@ -1,0 +1,9 @@
+.generated_files/**
+build/**
+dist/**
+nbproject/**
+/nbproject
+/dist
+/build
+/nbproject
+/build
